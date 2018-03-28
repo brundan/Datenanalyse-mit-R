@@ -3,9 +3,6 @@ title       : Termin 1 (inclass)
 description : Übungen zu grundlegenden Funktionen mit R
 
 
-
-
-
 ---
 ## Wiederholung wesentlicher Inhalte
 
@@ -89,6 +86,8 @@ test_error()
 success_msg("Sehr gut!")
 
 ```
+
+
 --- type:NormalExercise lang:r xp:100 skills:1 key:641f650cf3
 ## Einlesen von Datensätzen in R
 
@@ -151,7 +150,7 @@ Durch die unterschiedlichen Feiertage in Deutschland und den USA fehlen einige W
 Ersetzen Sie die NA Felder in dem Datensatz durch:
 
 - den Durchschnitt der gesamten Zeitreihe. Hierfür können Sie die `mean()`-Funktion nutzen.
-- in den [ ]-Klammern hinter der Variable stehen die Auswahlbedingungen. Beispielsweise: `spalte[ is.na(spalte) ]` gibt nur die Felder aus `spalte` zurück, in denen NA steht.
+- in den [ ]-Klammern hinter der Variable stehen die Auswahlbedingungen. Beispielsweise: `spalte[is.na(spalte)]` gibt nur die Felder aus `spalte` zurück, in denen NA steht.
 
 Ergänzen Sie die fehlenden Werte direkt im Datensatz `aktien`.
 
@@ -189,8 +188,8 @@ aktien$Date <- as.Date(aktien$Date)
 *** =sample_code
 ```{r}
 # Schaue, an welchen Tagen sich NAs befinden
-aktien$Date[ is.na(aktien$db) ] # entspricht Zeile 7 und 145 im Datensatz
-aktien$Date[ is.na(aktien$fb) ] # entspricht Zeile 197 und 222 im Datensatz
+aktien$Date[is.na(aktien$db)] # entspricht Zeile 7 und 145 im Datensatz
+aktien$Date[is.na(aktien$fb)] # entspricht Zeile 197 und 222 im Datensatz
 
 # Ersetzen Sie NAs in der Spalte 'db' durch den Durchschnitt der Spalte
 
@@ -250,6 +249,7 @@ Nützliche R Funktionen:
 
 
 
+
 *** =hint
 
 
@@ -287,7 +287,7 @@ aktien <- aktien[order(aktien$Date),]
 # Finde die Zeile mit dem ersten Feiertag "2016-04-14" und speichere die Zeilennummer in index1
 index1 <- which(___ == "___")
 # durch Durchschnitt ersetzen
-aktien$db[___] <- ___( aktien$db[ c((index1-___):(index1-___),(index1+___):(index1+___))] )
+aktien$db[___] <- ___( aktien$db[c((index1-___):(index1-___),(index1+___):(index1+___))] )
 # Überprüfe neuen Wert
 aktien$db[___]
 
@@ -412,17 +412,22 @@ test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad))
 --- type:NormalExercise lang:r xp:100 skills:1 key:860b4a4e28
 ## Berechnungen in R: Rendite (I)
 
-Gegeben ist wieder der Datensatz `aktien` (bereits eingelesen). Berechnen Sie die diskreten Renditen für jeden Tag der Zeitreihe. 
+Der Datensatz liegt in `aktien`. Berechnen Sie die stetigen Renditen für jeden Tag der Zeitreihe. 
+
 
 
 *** =instructions
 
-- berechnen Sie die diskreten Rendite für die Kurse der Deutsche Bank (`aktien$db`)
+- berechnen Sie die stetige Rendite für die Kurse der Deutsche Bank (`aktien$db`)
+
+
 
 *** =hint
 
 - Achten Sie darauf, dass die beiden Vektoren die gleiche Länge haben müssen.
 - Die Länge eines Vektors bekommen Sie durch `length(vektor)` und ergibt 254.
+
+
 
 *** =pre_exercise_code
 ```{r}
@@ -495,14 +500,20 @@ success_msg("Sehr gut!")
 --- type:NormalExercise lang:r xp:100 skills:1 key:ce73d9c96b
 ## Berechnungen in R: Rendite (II)
 
-Der Datensatz liegt in `aktien`. Berechnen Sie die stetigen Renditen für jeden Tag der Zeitreihe. 
+Der Datensatz liegt in `aktien`. Nun sollen die stetigen (logarithmischen) Renditen für jeden Tag berechnet werden.
 
+Tipps:
+
+Vektoren können in R einfach elementweise voneinander subtrahiert werden, solange sie die gleiche Dimension haben. Durch `vektor[5:length(vektor)]` entsteht ein Vektor, der alle Elemente von `vektor` ab dem 5. Element enthält.
+
+Den natürlichen Logarithmus können Sie in R einfach mit `log(x)` bestimmen. Hierbei kann `x` auch ein Vektor sein, der Logarithmus wird in dem Fall elementeweise ausgeführt.
+
+Die Formel zur Berechnung der log-Rendite finden Sie im Skript.
 
 
 *** =instructions
 
-- berechnen Sie die stetige Rendite für die Kurse der Deutsche Bank (`aktien$db`)
-
+Berechnen Sie die log-Rendite für die Deutsche Bank für jeden Tag des gegebenen Datensatzes. `aktien$db` gibt Ihnen den Vektor mit den benötigten Daten.
 
 
 *** =hint
@@ -568,3 +579,205 @@ logRenditeDB <- log(x_t) - log(x_tminus1)
 *** =sct
 ```{r}
 test_object("x_tminus1")
+test_object("x_t")
+test_object("logRenditeDB")
+
+test_error()
+success_msg("Sehr gut!")
+```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:5efd106c9f
+## Grafische Darstellung
+
+In R gibt es viele Möglichkeiten, Daten grafisch darzustellen. In früheren Aufgaben haben Sie bereits einige Plots gesehen. Solche Plots sollen in dieser Aufgabe nun von Ihnen erstellt werden.
+
+Verwenden Sie `plot(x,y, ...)` um die Zeitreihe der Facebook-Aktie zu plotten. Verwenden Sie den Eröffnungspreis (Open) im Datensatz `aktien`. 
+Hilfe zum `plot` Befehl und den Eingabemöglichkeiten finden Sie, indem Sie `?plot()` in der Konsole eingeben. 
+
+*** =instructions
+
+Der Plot sollte folgende Anforderungen erfüllen:
+
+- Die Datenpunkte sollten durch Linien miteinander verbunden sein.
+- Der Plot sollte einen sinnvollen Titel erhalten.
+- Die x-Achse und y-Achse sollten mit "Datum" und "Eroeffnungspreis ($)" beschriftet werden.
+
+
+*** =hint
+
+Im Plot Befehl müssen Sie type, main, xlab und ylab füllen. Das tuen Sie durch plot(x,y,type = "l", main = ...)
+
+*** =pre_exercise_code
+```{r}
+# Plotten der Zeitreihe aus 1
+# Einlesen der Daten (Daten sind bereits eingelesen)
+aktien <- read.csv("https://www.uni-duesseldorf.de/redaktion/fileadmin/redaktion/Fakultaeten/Wirtschaftswissenschaftliche_Fakultaet/Statistik/Kurse/BW_09/fb_aktie.csv")
+
+# Datum als class Date initialisieren
+aktien$Date <- as.Date(aktien$Date)
+
+# sortieren Datensatz nach Datum
+aktien <- aktien[order(aktien$Date),]
+
+```
+
+*** =sample_code
+```{r}
+plot( __ , __ , type = __ , main = __ , xlab = "Datum", ylab = __ )
+
+```
+
+*** =solution
+```{r}
+# Plot erstellen 
+plot(aktien$Date, aktien$Open, type = "l", main = "Facebook Aktie 2016-2017", xlab = "Datum", ylab = "Eroeffnungspreis ($)")
+
+```
+
+*** =sct
+```{r}
+test_function("plot", args = c("x", "y", "type", "xlab", "ylab") )
+test_error()
+success_msg("Sehr gut!")
+
+```
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:de382d695d
+##  Analyse der Daten
+
+Im Datensatz `aktien` haben wir den Eröffnungspreis und die jeweilige Tagesrendite der Facebook Aktie von einem Jahr. Wir betrachten nun die Volatilität der Zeitreihe. Bei dem Plot der Eröffnungspreise (Plot 1) kann man nur grob schätzen wo die Volatilität am stärksten ist. Im Plot 2 sehen Sie die Rendite der Zeitreihe geplottet. Hier kann man das Ergebnis schon etwas besser heraus lesen.
+
+Wo ist die Volatilität am höchsten? 
+
+Sollte die Lösung nicht eindeutig sein, können Sie auch die Ergebnisse des `var()` Befehls für die angegebenen Zeiträume vergleichen.
+
+
+*** =instructions
+
+- Anfang November
+- Ende April
+- Anfang Januar
+- Mitte August
+
+
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+library(dplyr)
+# Einlesen der Daten 
+aktien <- read.csv("https://www.uni-duesseldorf.de/redaktion/fileadmin/redaktion/Fakultaeten/Wirtschaftswissenschaftliche_Fakultaet/Statistik/Kurse/BW_09/fb_aktie.csv")
+
+# Datum als class Date initialisieren
+aktien$Date <- as.Date(aktien$Date)
+
+# sortieren Datensatz nach Datum
+aktien <- aktien[order(aktien$Date),]
+
+# Verkleinerung der Datensätze
+aktien <- select(aktien, Date, Open)
+plot(aktien$Date, aktien$Open, type = "l", main = "Facebook Aktie 2016-2017", xlab = "Datum", ylab = "Eröffnungspreis ($)")
+
+# Funktion zur Berechnung der Rendite
+rendite <- function(zeitreihe){ 
+  r <- zeitreihe[1:(length(zeitreihe)-1)];  
+  ren <- zeitreihe[2:length(zeitreihe)];
+  ren <- (ren - r) / r;
+  return(ren)     
+}
+
+# Rendite für Eröffnungspreise berechnen
+fbRendite <- rendite(aktien$Open) 
+
+# Rendite zum Datensatz hizufügen, vorne 0
+fbRen <- c(0,fbRendite)
+aktien[ , "Rendite"] <- fbRen
+
+plot(aktien$Date, aktien$Rendite, type = "l", main = "Facebook Aktie 2016-2017", xlab = "Datum", ylab = "Rendite")
+
+```
+
+*** =sct
+```{r}
+msg_bad <- "Falsch!"
+msg_success <- "Richtig!"
+test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad, msg_bad))
+
+```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:5e209754d2
+## Histogramm
+Der Datensatz `aktien` mit den berechneten Renditen für die Deutsche Bank Aktie ist bereits eingelesen. Erstellen Sie ein Histogramm über die Verteilung der Renditen. 
+
+Nutzen Sie die Funktion zum Erstellen eines Histogramms ist `hist(x,...)`.
+
+
+*** =instructions
+Nutzen Sie `?hist()` um mehr über die Anwendung der Funktion zu erfahren.
+Das Histogramm sollte enthalten: 
+
+- `breaks` um die Dicke der Balken anzupassen.
+- eine Überschrift "Verteilung der Renditen".
+- `xlab` und `ylab` zur Beschriftung der Achsen, mit "Renditen" und "Haeufigkeit".
+
+
+*** =hint
+
+- Auf die x-Werte können Sie über `aktien$Rendite` zugreifen
+- Denken Sie daran, die Beschriftungen in Anführungszeichen zu setzen.
+
+
+*** =pre_exercise_code
+```{r}
+# Einlesen der Daten
+aktien <- read.csv("https://www.uni-duesseldorf.de/redaktion/fileadmin/redaktion/Fakultaeten/Wirtschaftswissenschaftliche_Fakultaet/Statistik/Kurse/BW_09/db_aktie.csv")
+
+# Datum als class Date initialisieren
+aktien$Date <- as.Date(aktien$Date)
+
+# sortieren Datensatz nach Datum
+aktien <- aktien[order(aktien$Date),]
+
+# Funktion zur Berechnung der Rendite
+rendite <- function(zeitreihe){ 
+  r <- zeitreihe[1:(length(zeitreihe)-1)];  
+  ren <- zeitreihe[2:length(zeitreihe)];
+  ren <- (ren - r) / r;
+  return(ren)     
+}
+
+# Rendite von DB Aktien
+rDbAktien <- rendite(aktien$Open)
+
+# Rendite zum Datensatz hinzufügen
+rDbAktien <- c(0,rDbAktien)
+aktien[ , "Rendite"] <- rDbAktien
+
+```
+
+*** =sample_code
+```{r}
+# Erstellen Sie ein Histogramm und setzen Sie breaks = 20.
+
+# Erstellen Sie das Histogramm mit breaks = 40.
+
+```
+
+*** =solution
+```{r}
+# Erstellen Sie ein Histogramm und setzen Sie breaks = 20.
+hist(aktien$Rendite, breaks = 20, main = "Verteilung der Renditen", xlab = "Renditen", ylab = "Haeufigkeit")
+
+# Erstellen Sie das Histogramm mit breaks = 40.
+hist(aktien$Rendite, breaks = 40, main = "Verteilung der Renditen", xlab = "Renditen", ylab = "Haeufigkeit")
+
+```
+
+*** =sct
+```{r}
+test_function("hist", args = c("x", "breaks", "main", "xlab", "ylab"), index = 1) 
+test_function("hist", args = c("x", "breaks", "main", "xlab", "ylab"), index = 2) 
+test_error()
+success_msg("Gratulation! Sie haben die letzte Aufgabe gemeistert.")
+```
