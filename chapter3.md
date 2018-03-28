@@ -1,6 +1,6 @@
 ---
 title       : Termin 1 (homework)
-description : Hausaufgabe zum Einlesen, Analysieren und Darstellen von Daten mit R
+description : Wiederholungsaufgaben zum Einlesen, Analysieren und Darstellen von Daten mit R
 attachments :
   slides_link :
 
@@ -57,7 +57,7 @@ success_msg("Sehr gut!")
 ## Missing Values (I)
 
 
-Gegeben ist der Datensatz `aktien` (bereits eingelesen). Er besteht aus den Kursdaten der Henkel AG (Frankfurter Börse) und von Exxon Mobile (NYSE). 
+Der Datensatz `aktien` (bereits eingelesen) besteht aus den Kursdaten der Henkel AG (Frankfurter Börse) und von Exxon Mobile (NYSE). 
 Durch die unterschiedlichen Feiertage in Deutschland und den USA fehlen einige Werte im Datensatz. Diese Felder sind mit `NA` gekennzeichnet und sind Gegenstand der vorliegenden Aufgabe.
 
 (Quelle der Daten: de.finance.yahoo.com)
@@ -147,25 +147,15 @@ success_msg("Sehr gut!")
 --- type:NormalExercise lang:r xp:300 skills:2 key:552b0d5936
 ## Missing Values (II)
 
-Gegeben ist wieder der Datensatz `aktien` (bereits eingelesen). Ersetzen Sie nun die NAs im Datensatz durch den gleitenden Durchschnitt über 10 Tage. Nehmen Sie hierfür den Durchschnitt von den 5 vorherigen und 5 folgenden Werten. 
+Ersetzen Sie im Datensatz `aktien` (bereits eingelesen) die NA's durch den gleitenden Durchschnitt über 10 Tage. Nehmen Sie hierfür den Durchschnitt von den 5 vorherigen und 5 folgenden Werten. 
 
-Nützliche R Funktionen:
-
-- `c(1,2,3,4,9)` bildet einen Vektor mit dem Inhalt 1,2,3,4,9.
-- `c(1:4,9)` bildet den gleichen Vektor.
-- `which(9 == c(1:4,9) )` gibt an, an welcher Stelle der Vektor dem Wert 9 entspricht (also = 5).
+Vorsicht: es liegen jetzt mehrere NA's pro Zeitreihe vor!
 
 
 *** =instructions
 
-Gegeben ist wieder der Datensatz `aktien` (bereits eingelesen). Ersetzen Sie nun die NAs im Datensatz durch den gleitenden Durchschnitt über 10 Tage. Nehmen Sie hierfür den Durchschnitt von den 5 vorherigen und 5 folgenden Werten. 
-
-Nützliche R Funktionen:
-
-Die NA-Stellen finden Sie über: 
-`aktien$Date[is.na(aktien$exxon)]`
-
-Für Henkel analog.
+- ersetzen Sie NA's (Henkel) durch den gleitenden Durchschnitt
+- ersetzen Sie NA's (Exxon) durch den gleitenden Durchschnitt
 
 
 *** =hint
@@ -286,7 +276,7 @@ success_msg("Sehr gut!")
 Ihre Ergebnisse aus der letzten Aufgabe sollen nun zum Vergleich der Methoden geplottet werden. Benutzen Sie die Daten der Henkel Aktie und vergleichen Sie die Methoden der Ersetzung. Der Datensatz bei dem die NAs durch den gesamten Durchschnitt ersetzt wurden ist `aktien2` (bereits eingelesen). Der, bei dem die NAs durch den gleitenden 10-er Durchschnitt ersetzt wurden, ist `aktien` (bereits eingelesen).
 
 
-Schauen Sie sich beide Plots an und vergleichen Sie die ersetzten Stellen (Feiertage am "2016-10-31" und "2016-10-03"). 
+Betrachten Sie beide Plots und vergleichen Sie die ersetzten Stellen (Feiertage am "2016-10-31" und "2016-10-03"). 
 
 Hilfe zur `plot()` bekommen Sie wie immer durch `?plot()`.
 
@@ -359,18 +349,14 @@ success_msg("Sehr gut!")
 --- type:NormalExercise lang:r xp:100 skills:1 key:862e75aa1a
 ## Rendite (I)
 
-Gegeben ist wieder der Datensatz `aktien` (bereits eingelesen). Nun sollen die diskreten Renditen für jeden Tag der Zeitreihe berechnet werden. 
-
-Vektoren können in R einfach elementweise voneinander subtrahiert werden, solange sie die gleiche Dimension haben. 
-
-Tipp: Durch `vektor[5:length(vektor)]` entsteht ein Vektor, der alle Elemente von `vektor` ab dem 5. Element enthält.
-
-Die Formel zur Berechnung der Rendite finden Sie im Skript.
-
+Berechnen Sie die diskreten Renditen für jeden Tag einer Zeitreihe. Verwenden Sie den Datensatz `aktien` (bereits eingelesen). 
 
 
 *** =instructions
-Berechnen Sie die Rendite für Henkel für jeden Tag des gegebenen Datensatzes. `aktien$henkel` gibt Ihnen den Vektor mit den benötigten Daten.
+
+- berechnen Sie die diskrete Rendite für die Kurse von Henkel (`aktien$henkel`)
+
+
 
 *** =hint
 - Achten Sie darauf, dass die beiden Vektoren die gleiche Länge haben müssen.
@@ -434,18 +420,13 @@ success_msg("Sehr gut!")
 --- type:NormalExercise lang:r xp:100 skills:1 key:f014685cd8
 ## Rendite (II)
 
-Das Objekt `aktien` mit den benötigten Daten ist bereits eingelesen. Nun sollen die stetigen (logarithmischen) Renditen für jeden Tag berechnet werden.
+Berechnen Sie die stetigen Renditen für jeden Tag einer Zeitreihe. Verwenden Sie den Datensatz `aktien` (bereits eingelesen). 
 
-Tipps:
-
-Vektoren können in R einfach elementweise voneinander subtrahiert werden, solange sie die gleiche Dimension haben. Durch `vektor[5:length(vektor)]` entsteht ein Vektor, der alle Elemente von `vektor` ab dem 5. Element enthält.
-
-Den natürlichen Logarithmus können Sie in R einfach mit `log(x)` bestimmen. Hierbei kann `x` auch ein Vektor sein, der Logarithmus wird in dem Fall elementeweise ausgeführt.
-
-Die Formel zur Berechnung der log-Rendite finden Sie im Skript.
 
 *** =instructions
-Berechnen Sie die log-Rendite für Henkel für jeden Tag des gegebenen Datensatzes. `aktien$henkel` gibt Ihnen den Vektor mit den benötigten Daten.
+
+- berechnen Sie die stetige Rendite für die Kurse von Henkek (`aktien$henkel`)
+
 
 *** =hint
 
@@ -570,7 +551,7 @@ test_error()
 --- type:NormalExercise lang:r xp:50 skills:1 key:72c5438fee
 ## Histogramm
 
-Der Datensatz `aktien` mit den berechneten Renditen für die  Exxon Aktie ist bereits eingelesen. Erstellen Sie ein Histogramm über die Verteilung der Renditen. 
+Der Datensatz `aktien` mit den berechneten Renditen für die Exxon Aktie ist bereits eingelesen. Erstellen Sie ein Histogramm über die Verteilung der Renditen. 
 
 Nutzen Sie die Funktion zum Erstellen eines Histogramms ist `hist(x,...)`.
 
