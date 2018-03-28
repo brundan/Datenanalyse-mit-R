@@ -22,7 +22,7 @@ Alle Themen werden in den folgenden Aufgaben nochmals intensiv trainiert.
 - speichern Sie den zweiten und fünften Eintrag des Vektors `kurse_vec` in `daten_auswahl1`
 - speichern Sie nur die Kurse des Vektors `kurse_vec`, die über 18 liegen, in `daten_auswahl2`
 - speichern Sie die Kurse der zweiten Spalte und Zeile 30 bis 40 aus `kurse_mat` in `daten_auswahl3`
-- speichern Sie die Kurse Facebookaktie in `kurse_dataframe` in `daten_auswahl4`
+- speichern Sie die Kurse der Facebookaktie aus `kurse_dataframe` in `daten_auswahl4`
 - berechnen Sie mit den Daten aus `kurse_dataframe` die absolute Kursspanne für alle Handelstage und speichern Sie das Ergebnis in `daten_auswahl5`
 
 
@@ -140,7 +140,8 @@ success_msg("Sehr gut!")
 --- type:NormalExercise lang:r xp:100 skills:1 key:5db7fe4b29
 ## Missing Values (I)
 
-Gegeben ist der Datensatz `aktien` (bereits eingelesen). Er besteht aus den Kursdaten der Deutschen Bank (gehandelt an einer inländischen Börse) und facebook (gehandelt an einer US Börse). 
+Der Datensatz `aktien` (bereits eingelesen) besteht aus den Kursdaten der Deutschen Bank (gehandelt an einer inländischen Börse) und facebook (gehandelt an einer US Börse). 
+
 Durch die unterschiedlichen Feiertage in Deutschland und den USA fehlen einige Werte im Datensatz. Diese Felder sind mit `NA` gekennzeichnet und sind Gegenstand der vorliegenden Aufgabe.
 
 (Quelle der Daten: de.finance.yahoo.com)
@@ -412,20 +413,15 @@ test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad))
 --- type:NormalExercise lang:r xp:100 skills:1 key:860b4a4e28
 ## Berechnungen in R: Rendite (I)
 
-Der Datensatz liegt in `aktien`. Berechnen Sie die stetigen Renditen für jeden Tag der Zeitreihe. 
-
+Berechnen Sie die diskreten Renditen für jeden Tag einer Zeitreihe. Verwenden Sie den Datensatz `aktien` (bereits eingelesen). 
 
 
 *** =instructions
 
-- berechnen Sie die stetige Rendite für die Kurse der Deutsche Bank (`aktien$db`)
-
-
+- berechnen Sie die diskrete Rendite für die Kurse der Deutsche Bank (`aktien$db`)
 
 *** =hint
 
-- Achten Sie darauf, dass die beiden Vektoren die gleiche Länge haben müssen.
-- Die Länge eines Vektors bekommen Sie durch `length(vektor)` und ergibt 254.
 
 
 
@@ -500,20 +496,13 @@ success_msg("Sehr gut!")
 --- type:NormalExercise lang:r xp:100 skills:1 key:ce73d9c96b
 ## Berechnungen in R: Rendite (II)
 
-Der Datensatz liegt in `aktien`. Nun sollen die stetigen (logarithmischen) Renditen für jeden Tag berechnet werden.
-
-Tipps:
-
-Vektoren können in R einfach elementweise voneinander subtrahiert werden, solange sie die gleiche Dimension haben. Durch `vektor[5:length(vektor)]` entsteht ein Vektor, der alle Elemente von `vektor` ab dem 5. Element enthält.
-
-Den natürlichen Logarithmus können Sie in R einfach mit `log(x)` bestimmen. Hierbei kann `x` auch ein Vektor sein, der Logarithmus wird in dem Fall elementeweise ausgeführt.
-
-Die Formel zur Berechnung der log-Rendite finden Sie im Skript.
+Berechnen Sie die stetigen Renditen für jeden Tag einer Zeitreihe. Verwenden Sie den Datensatz `aktien` (bereits eingelesen). 
 
 
 *** =instructions
 
-Berechnen Sie die log-Rendite für die Deutsche Bank für jeden Tag des gegebenen Datensatzes. `aktien$db` gibt Ihnen den Vektor mit den benötigten Daten.
+- berechnen Sie die stetige Rendite für die Kurse der Deutsche Bank (`aktien$db`)
+
 
 
 *** =hint
@@ -645,7 +634,7 @@ success_msg("Sehr gut!")
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:de382d695d
 ##  Analyse der Daten
 
-Im Datensatz `aktien` haben wir den Eröffnungspreis und die jeweilige Tagesrendite der Facebook Aktie von einem Jahr. Wir betrachten nun die Volatilität der Zeitreihe. Bei dem Plot der Eröffnungspreise (Plot 1) kann man nur grob schätzen wo die Volatilität am stärksten ist. Im Plot 2 sehen Sie die Rendite der Zeitreihe geplottet. Hier kann man das Ergebnis schon etwas besser heraus lesen.
+Im Datensatz `aktien` haben wir den Eröffnungspreis und die jeweilige Tagesrendite der Facebook Aktie von einem Jahr. Wir betrachten nun die Volatilität der Zeitreihe. Bei dem Plot der Eröffnungspreise (Plot 1) kann man nur grob schätzen wo die Volatilität am stärksten ist. Im Plot 2 sehen Sie die Rendite der Zeitreihe geplottet. 
 
 Wo ist die Volatilität am höchsten? 
 
@@ -708,7 +697,7 @@ test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad, msg_bad))
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:5e209754d2
 ## Histogramm
-Der Datensatz `aktien` mit den berechneten Renditen für die Deutsche Bank Aktie ist bereits eingelesen. Erstellen Sie ein Histogramm über die Verteilung der Renditen. 
+Erstellen Sie ein Histogramm über die Verteilung der Renditen (bereits einlesen unter `aktien$Rendite`). 
 
 Nutzen Sie die Funktion zum Erstellen eines Histogramms ist `hist(x,...)`.
 
@@ -717,9 +706,9 @@ Nutzen Sie die Funktion zum Erstellen eines Histogramms ist `hist(x,...)`.
 Nutzen Sie `?hist()` um mehr über die Anwendung der Funktion zu erfahren.
 Das Histogramm sollte enthalten: 
 
-- `breaks` um die Dicke der Balken anzupassen.
-- eine Überschrift "Verteilung der Renditen".
-- `xlab` und `ylab` zur Beschriftung der Achsen, mit "Renditen" und "Haeufigkeit".
+- `breaks` um die Dicke der Balken anzupassen
+- eine Überschrift "Verteilung der Renditen"
+- `xlab` und `ylab` zur Beschriftung der Achsen, mit "Renditen" und "Haeufigkeit"
 
 
 *** =hint
