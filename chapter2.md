@@ -4,6 +4,8 @@ description : Übungen zu grundlegenden Funktionen mit R
 
 
 
+
+
 --- type:NormalExercise lang:r xp:100 skills:1 key:641f650cf3
 ## Wiederholung wesentlicher Inhalte
 
