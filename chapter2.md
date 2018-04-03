@@ -3,21 +3,16 @@ title       : Termin 1 (inclass)
 description : Übungen zu grundlegenden Funktionen mit R
 
 
----
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:641f650cf3
 ## Wiederholung wesentlicher Inhalte
 
-```yaml
-type: NormalExercise
-key: b7121efa78
-lang: r
-xp: 100
-skills: 1
-```
+
 In dieser Aufgabe werden wir kurz den Zugriff auf Objekte unterschiedlicher Typen, das Einlesen von Datensätzen und einfache Berechnungen wiederholen. 
 
 Alle Themen werden in den folgenden Aufgaben nochmals intensiv trainiert. 
 
-`@instructions`
+*** =instructions
 
 - speichern Sie den zweiten und fünften Eintrag des Vektors `kurse_vec` in `daten_auswahl1`
 - speichern Sie nur die Kurse des Vektors `kurse_vec`, die über 18 liegen, in `daten_auswahl2`
@@ -26,13 +21,14 @@ Alle Themen werden in den folgenden Aufgaben nochmals intensiv trainiert.
 - berechnen Sie mit den Daten aus `kurse_dataframe` die absolute Kursspanne für alle Handelstage und speichern Sie das Ergebnis in `daten_auswahl5`
 
 
-`@hint`
+*** =pre_exercise_code
 
-`@pre_exercise_code`
 ```{r}
-deutschebank <- read.csv("https://www.uni-duesseldorf.de/redaktion/fileadmin/redaktion/Fakultaeten/Wirtschaftswissenschaftliche_Fakultaet/Statistik/Kurse/BW_09/db_aktie_Feiertage2NA.csv")
-facebook <- read.csv("https://www.uni-duesseldorf.de/redaktion/fileadmin/redaktion/Fakultaeten/Wirtschaftswissenschaftliche_Fakultaet/Statistik/Kurse/BW_09/fb_aktie2NA.csv")
 library(dplyr)
+
+deutschebank <- read.csv("https://www.uni-duesseldorf.de/redaktion/fileadmin/redaktion/Fakultaeten/Wirtschaftswissenschaftliche_Fakultaet/Statistik/Kurse/BW_09/db_aktie_Feiertage2NA.csv",stringsAsFactors = F)
+facebook <- read.csv("https://www.uni-duesseldorf.de/redaktion/fileadmin/redaktion/Fakultaeten/Wirtschaftswissenschaftliche_Fakultaet/Statistik/Kurse/BW_09/fb_aktie2NA.csv", stringsAsFactors = F)
+
 aktienjoin <- full_join(facebook, deutschebank, by = "Date")
 aktien <- select(aktienjoin, Date, fb = Open.x, db = Open.y )
 remove(aktienjoin)
@@ -45,7 +41,8 @@ kurse_mat <- cbind(aktien$db,aktien$fb)
 kurse_dataframe <- aktien
 ```
 
-`@sample_code`
+*** =sample_code
+
 ```{r}
 # alle benötigten Objekte sind bereits eingelesen
 daten_auswahl1 <- ___
@@ -57,12 +54,12 @@ daten_auswahl3 <- ___
 daten_auswahl4 <- ___
 
 daten_auswahl5 <- ___
-
-
 ```
 
-`@solution`
+*** =solution
 ```{r}
+
+
 daten_auswahl1 <- kurse_vec[c(2,5)]
 
 daten_auswahl2 <- kurse_vec[kurse_vec > 18]
@@ -75,7 +72,9 @@ daten_auswahl5 <- abs(kurse_dataframe$fb- kurse_dataframe$db)
 
 ```
 
-`@sct`
+
+*** =sct
+
 ```{r}
 test_object("daten_auswahl1") 
 test_object("daten_auswahl2")
@@ -88,7 +87,9 @@ success_msg("Sehr gut!")
 ```
 
 
---- type:NormalExercise lang:r xp:100 skills:1 key:641f650cf3
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:4b6d8a8f54
 ## Einlesen von Datensätzen in R
 
 Ihnen wurde der Preisverlauf der Deutschen Bank Aktie eines Jahres als `CSV-Datei` unter der angegebenen URL zur Verfügung gestellt.
