@@ -47,6 +47,7 @@ kurse_vec <- c(aktien$db)
 kurse_mat <- cbind(aktien$db,aktien$fb)
 kurse_dataframe <- aktien
 ```
+
 `@sample_code`
 ```{r}
 # alle benötigten Objekte sind bereits eingelesen
