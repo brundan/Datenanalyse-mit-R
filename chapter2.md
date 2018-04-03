@@ -251,6 +251,8 @@ Nützliche R Funktionen:
 - ersetzen Sie NA am "2016-04-14" (Deutsche Bank) durch den gleitenden Durchschnitt
 - ersetzen Sie NA am "2017-01-16" (Facebook) durch den gleitenden Durchschnitt
 
+`@hint`
+
 
 `@pre_exercise_code`
 ```{r}
@@ -355,6 +357,8 @@ Welche Methode eignet sich besser zur Ersetzung?
 - Gleitender 10er-Durchschnitt
 - Durchschnitt gesamte Spalte
 
+`@hint`
+
 
 `@pre_exercise_code`
 ```{r}
@@ -420,6 +424,8 @@ Berechnen Sie die diskreten Renditen für jeden Tag einer Zeitreihe. Verwenden S
 
 `@instructions`
 - berechnen Sie die diskrete Rendite für die Kurse der Deutsche Bank (`aktien$db`)
+
+`@hint`
 
 
 `@pre_exercise_code`
