@@ -1,29 +1,32 @@
 ---
-title       : Einführung in DataCamp
-description :  Dieses Kapitel soll dazu dienen sich in DataCamp zurechtzufinden
+title: Einführung in DataCamp
+description: >-
+  Dieses Kapitel soll dazu dienen sich in DataCamp zurechtzufinden
 
 
---- type:NormalExercise lang:r xp:10 skills:1 key:a57baa03e8
-##Beispiel: Vektoren
+---
+## Beispiel: Vektoren
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 10
+skills: 1
+key: a57baa03e8
+```
 
 An dieser Stelle finden Sie immer die Aufgabenstellung. 
 
 Starten Sie zunächst mit einer einfachen Übung...
 
-*** =instructions
-
+`@instructions`
 - Definieren Sie einen Vektor, der aus den Elementen 1 bis 5 besteht.
 
-*** =hint 
+`@hint`
 c(1:5)
 
-*** =pre_exercise_code
-```{r}
 
-```
-
-*** =sample_code
-
+`@sample_code`
 ```{r}
 # Dieses Fenster stellt den Editor dar, den Sie bereits aus RStudio kennnen und erlaubt es Skripte zu schreiben.
 # Lösungscode wird immer in dieses Fenster geschrieben. Für Zwischenschritte können Sie aber auch direkt in der Konsole arbeiten.
@@ -31,15 +34,13 @@ c(1:5)
 # Wichtig: In dem auskommentierten Teil am Anfang dieses Skriptes finden Sie weitere Hinweise, wie die Aufgabe zu lösen ist.
 # Im vorliegenden Beispiel lautet die Anweisung, die Lösung unter dem Objekt *testvektor* zu speichern.
 
-testvektor <- 
+testvektor <-
 ```
-
-*** =solution
+`@solution`
 ```{r}
 testvektor <- c(1:5)
 ```
-
-*** =sct
+`@sct`
 ```{r}
 test_error()
 test_object("testvektor",
@@ -49,39 +50,46 @@ success_msg("Richtig!")
 ```
 
 
---- type:NormalExercise lang:r xp:10 skills:1 key:235b491598
+
+
+
+---
 ## Daten einlesen
 
-
-*** =instructions
-
-Ein einfaches Beispiel soll das Einlesen von Daten mit `read.csv()` demonstrieren.
-
-
-*** =hint
-
-
-
-*** =pre_exercise_code
-```{r}
-
+```yaml
+type: NormalExercise
+lang: r
+xp: 10
+skills: 1
+key: 235b491598
 ```
 
-*** =sample_code
+
+
+`@instructions`
+Ein einfaches Beispiel soll das Einlesen von Daten mit `read.csv()` demonstrieren.
+
+`@hint`
+
+
+
+`@sample_code`
 ```{r}
 # die Daten liegen in https://www.uni-duesseldorf.de/redaktion/fileadmin/redaktion/Fakultaeten/Wirtschaftswissenschaftliche_Fakultaet/Statistik/Kurse/BW_09/db_aktie_Feiertage2NA.csv
 
-test <- 
+test <-
 ```
-
-*** =solution
+`@solution`
 ```{r}
 test <- read.csv("https://www.uni-duesseldorf.de/redaktion/fileadmin/redaktion/Fakultaeten/Wirtschaftswissenschaftliche_Fakultaet/Statistik/Kurse/BW_09/db_aktie_Feiertage2NA.csv")
 ```
-
-*** =sct
+`@sct`
 ```{r}
 test_object("test")
 test_error()
 success_msg("Sehr gut!")
 ```
+
+
+
+
