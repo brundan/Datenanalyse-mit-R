@@ -4,6 +4,8 @@ description: >-
   Übungen zu grundlegenden Funktionen mit R
 
 
+
+
 ---
 ## Wiederholung wesentlicher Inhalte
 
