@@ -1,12 +1,12 @@
+library(devtools)
 library(remotes)
 
 ##### Install specific package versions from CRAN #####
 
-# install_version("ggplot2", "2.2.1")
-install_version("dplyr")
-#install.packages("dplyr")
-# install_version("tidyr", "0.8.0")
-# install_version("purrr", "0.2.4")
+devtools::install_version("ggplot2")
+devtools::install_version("dplyr")
+devtools::install_version("tidyr")
+devtools::install_version("purrr")
 
 ##### Install packages in development from GitHub #####
 
