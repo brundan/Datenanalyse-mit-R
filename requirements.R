@@ -1,34 +1,4 @@
-#library(devtools)
-library(remotes)
-
-##### Install specific package versions from CRAN #####
-
-devtools::install_version("ggplot2")
-devtools::install_version("dplyr")
-devtools::install_version("tidyr")
-devtools::install_version("purrr")
-
-##### Install packages in development from GitHub #####
-
-# install_github("nicholasehamilton/ggtern")
-
-##### Install packages from Bioconductor
-
-# source("https://bioconductor.org/biocLite.R")
-# biocLite("GenomicRanges")
-
-##### Include datasets in the image
-
-data_dir <- "/usr/local/share/datasets"
-dir.create(data_dir)
-
-#' @param x Filename of the datasets, as a string, not including the directory path.
-#' @param course_id The Teach course ID, as an integer.
-get_data <- function(x, course_id) {
-  download.file(
-    sprintf("http://s3.amazonaws.com/assets.datacamp.com/production/course_%d/datasets/%s", course_id, x), 
-    file.path(data_dir, x)
-  )
-}
-  
-# get_data("mydata.rds", 9999)
+devtools::install_version("tibble", "1.4.2")
+devtools::install_version("plyr", "1.8.4")
+devtools::install_version("dplyr", "0.7.4")
+devtools::install_version("tidyr", "0.8.0")
