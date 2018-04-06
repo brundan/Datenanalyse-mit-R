@@ -1,4 +1,4 @@
-library(devtools)
+#library(devtools)
 library(remotes)
 
 ##### Install specific package versions from CRAN #####
